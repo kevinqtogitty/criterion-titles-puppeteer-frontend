@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import Table from './components/Table';
 import Loader from './components/Loader';
-import { inject } from '@vercel/analytics';
 
 export interface CriterionFilm {
   title: string;
@@ -15,7 +14,6 @@ function App() {
   const [allCriterionFilms, setAllCriterionFilms] = useState<CriterionFilm[]>();
   const [randomTenFilms, setRandomTenFilms] = useState<CriterionFilm[]>();
   const [isFetching, setIsFetching] = useState(true);
-  inject();
 
   /* ON MOUNT */
   useEffect(() => {
