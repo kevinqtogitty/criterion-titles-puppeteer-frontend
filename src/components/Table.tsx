@@ -19,22 +19,22 @@ const Table: React.FC<Props> = ({ randomTenFilms }): JSX.Element => {
     <table className="table-main">
       <thead>
         <tr className="table-categories">
-          <td>Title</td>
-          <td>Director</td>
-          <td>Year</td>
-          <td>Country</td>
+          <td id="table-category-title">Title</td>
+          <td id="table-category-director">Director</td>
+          <td id="table-category-year">Year</td>
+          <td id="table-category-country">Country</td>
         </tr>
       </thead>
       <tbody>
         {transitions((style, item) => (
           <a.a style={style} href={`${item?.link}`} target="_blank">
             <tr className="table-data-row">
-              <td>
+              <td id="table-data-title">
                 <img src={`${item?.imgUrl}`} alt={`${item?.title}`} />
               </td>
-              <td>{item?.director}</td>
-              <td>{item?.year}</td>
-              <td>{item?.country}</td>
+              <td id="table-data-director">{item?.director}</td>
+              <td id="table-data-year">{item?.year}</td>
+              <td id="table-data-country">{item?.country}</td>
             </tr>
           </a.a>
         ))}
