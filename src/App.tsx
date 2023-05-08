@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import Table from './components/Table';
+import Loader from './components/Loader';
 
 export interface CriterionFilm {
   title: string;
@@ -12,15 +14,15 @@ function App() {
   const [allCriterionFilms, setAllCriterionFilms] = useState<CriterionFilm[]>();
   const [randomTenFilms, setRandomTenFilms] = useState<CriterionFilm[]>();
   const [isFetching, setIsFetching] = useState(true);
-  const [isLoading, setIsLoading] = useState(true);
 
-  console.log(randomTenFilms, allCriterionFilms);
-
+  /* ON MOUNT */
   useEffect(() => {
-    fetchCriterionFilmData();
+    if (!allCriterionFilms) fetchCriterionFilmData();
+    return;
   }, []);
 
   useEffect(() => {
+    // If we've retrieved the data but havent saved it in session storage yet
     if (allCriterionFilms && !sessionStorage.getItem('savedTen')) {
       generateRandomTen();
     } else {
@@ -30,10 +32,12 @@ function App() {
       );
       setRandomTenFilms(data);
     }
+    return;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [allCriterionFilms]);
 
-  const fetchCriterionFilmData = async () => {
+  /* FUNCTIONS */
+  const fetchCriterionFilmData = async (): Promise<void> => {
     try {
       const response = await fetch('http://localhost:8080/films');
       const data = await response.json();
@@ -44,11 +48,11 @@ function App() {
     }
   };
 
-  const randomInteger = (min: number, max: number) => {
+  const randomInteger = (min: number, max: number): number => {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   };
 
-  const generateRandomTen = () => {
+  const generateRandomTen = (): void => {
     const randomFilms: CriterionFilm[] = [];
     if (allCriterionFilms) {
       for (let i = 0; i < 10; i++) {
@@ -67,36 +71,13 @@ function App() {
   return (
     <div className="main-container">
       <h1>Random Criterion</h1>
-      <button onClick={generateRandomTen}>New list</button>
-
-      {isFetching ? (
-        <div>Fetching criterion films</div>
-      ) : (
-        <table className="table-main">
-          <thead>
-            <tr className="table-categories">
-              <td>Title</td>
-              <td>Director</td>
-              <td>Year</td>
-              <td>Country</td>
-            </tr>
-          </thead>
-          <tbody>
-            {randomTenFilms?.map((film) => (
-              <a href={`${film.link}`} target="_blank">
-                <tr className="table-data-row">
-                  <td>
-                    <img src={`${film.imgUrl}`} alt={`${film.title}`} />
-                  </td>
-                  <td>{film.director}</td>
-                  <td>{film.year}</td>
-                  <td>{film.country}</td>
-                </tr>
-              </a>
-            ))}
-          </tbody>
-        </table>
+      {isFetching ? null : (
+        <div className="hero-button-container">
+          <button onClick={generateRandomTen}>New list</button>
+        </div>
       )}
+
+      {isFetching ? <Loader /> : <Table randomTenFilms={randomTenFilms} />}
     </div>
   );
 }
