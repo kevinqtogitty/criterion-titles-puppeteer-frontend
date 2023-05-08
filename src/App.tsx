@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Table from './components/Table';
 import Loader from './components/Loader';
 
@@ -19,7 +19,7 @@ function App() {
   useEffect(() => {
     if (!allCriterionFilms) fetchCriterionFilmData();
     return;
-  }, []);
+  }, [allCriterionFilms]);
 
   useEffect(() => {
     // If we've retrieved the data but havent saved it in session storage yet
