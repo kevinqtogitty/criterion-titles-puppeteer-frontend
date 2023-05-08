@@ -75,7 +75,7 @@ function App() {
       <h1>Random Criterion</h1>
       {isFetching ? null : (
         <div className="hero-button-container">
-          <button onClick={generateRandomTen}>New list</button>
+          <button onClick={generateRandomTen}>Randomize!</button>
         </div>
       )}
 
