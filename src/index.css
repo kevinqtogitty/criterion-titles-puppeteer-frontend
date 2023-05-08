@@ -1,5 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;500&display=swap');
+
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  color: #ffff;
+  font-family: 'Nunito Sans', sans-serif;
 }
+
+body {
+  min-height: 100vh;
+  padding: 1rem;
+  background-color: #141414;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* border: 2px solid red; */
+
+  row-gap: 2rem;
+}
+
+h1 {
+  font-size: 3rem;
+  /* border: 2px solid red; */
+  margin-bottom: 1rem;
+}
+
+button {
+  cursor: pointer;
+  color: #000;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  /* align-self: center; */
+}
+table {
+  /* border: 2px solid pink; */
+  max-width: 90%;
+  width: 100%;
+  /* align-self: center; */
+  font-weight: 200;
+}
+.table-categories {
+  /* border: 2px solid green; */
+  display: flex;
+  justify-content: space-between;
+  font-weight: 500;
+}
+
+.table-categories > td {
+  width: 100%;
+  text-align: center;
+  border: none;
+  padding: 0.5rem 1rem;
+  /* border: 2px solid red; */
+  margin-bottom: 1rem;
+}
+
+.table-data-row {
+  display: flex;
+  /* border: 2px solid blue; */
+  justify-content: space-between;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.table-data-row:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+tbody {
+  display: flex;
+  flex-direction: column;
+  /* row-gap: 1rem; */
+}
+
+tbody > a {
+  text-decoration: none;
+}
+
+.table-data-row > td {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  padding: 1rem 1rem;
+  padding-top: 1.5rem;
+  border-top: 0.5px solid #c1c1c1;
+}
+
+/* .table-main {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid green;
+
+  border: none;
+} */
