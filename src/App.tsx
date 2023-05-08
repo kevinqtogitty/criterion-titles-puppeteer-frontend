@@ -83,7 +83,7 @@ function App() {
           </thead>
           <tbody>
             {randomTenFilms?.map((film) => (
-              <a href={`${film.link}`}>
+              <a href={`${film.link}`} target="_blank">
                 <tr className="table-data-row">
                   <td>
                     <img src={`${film.imgUrl}`} alt={`${film.title}`} />
