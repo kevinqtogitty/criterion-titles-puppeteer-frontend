@@ -39,7 +39,9 @@ function App() {
   /* FUNCTIONS */
   const fetchCriterionFilmData = async (): Promise<void> => {
     try {
-      const response = await fetch('http://localhost:8080/films');
+      const response = await fetch(
+        'https://criterion-backend.onrender.com/films'
+      );
       const data = await response.json();
       setAllCriterionFilms(data);
       setIsFetching(false);
