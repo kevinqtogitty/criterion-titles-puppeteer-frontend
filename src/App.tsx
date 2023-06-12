@@ -1,15 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { useEffect, useState } from 'react';
 import Table from './components/Table';
 import Loader from './components/Loader';
+import { CriterionFilm } from './types/types';
 
-export interface CriterionFilm {
-  title: string;
-  director: string;
-  year: string;
-  country: string;
-  imgUrl: string;
-  link: string;
-}
 function App() {
   const [allCriterionFilms, setAllCriterionFilms] = useState<CriterionFilm[]>();
   const [randomTenFilms, setRandomTenFilms] = useState<CriterionFilm[]>();
@@ -17,7 +12,8 @@ function App() {
 
   /* ON MOUNT */
   useEffect(() => {
-    if (!allCriterionFilms) fetchCriterionFilmData();
+    if (!allCriterionFilms && !sessionStorage.getItem('savedTen'))
+      fetchCriterionFilmData();
     return;
   }, [allCriterionFilms]);
 
@@ -27,13 +23,11 @@ function App() {
       generateRandomTen();
     } else {
       const data: CriterionFilm[] = JSON.parse(
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         sessionStorage.getItem('savedTen')!
       );
       setRandomTenFilms(data);
     }
     return;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [allCriterionFilms]);
 
   /* FUNCTIONS */
@@ -43,7 +37,7 @@ function App() {
         'https://criterion-backend.onrender.com/films'
       );
       const data = await response.json();
-      setAllCriterionFilms(data);
+      setAllCriterionFilms(data.allfilms);
       setIsFetching(false);
     } catch (error) {
       console.log(error);
